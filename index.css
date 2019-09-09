@@ -1,0 +1,8 @@
+.manPre {
+  color: black;
+  font-size: 28px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  text-decoration: none;
+}

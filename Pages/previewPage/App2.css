@@ -1,0 +1,84 @@
+body {
+    background-color: rgba(48, 34, 54, 0.233);
+    background-image: url("https://www.thephotoargus.com/wp-content/uploads/2018/04/windmill22.jpg");
+    background-position: center;
+    background-size: 55%;
+    background-repeat: no-repeat;
+    background-blend-mode: exclusion;
+}
+
+.managePreview {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    border-end-end-radius: 2rem;
+}
+
+.previewColumn {
+    color: black;
+    font-size: 28px;
+    outline: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    text-decoration: none;
+}
+
+.manageColumn {
+    color: black;
+    font-size: 28px;
+}
+
+#tvShowListings {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 50px;
+    grid-auto-rows: minmax(100px, auto);
+    border: 2px solid rgb(23, 11, 99);
+    border-radius: 13px;
+    background-color: inherit;
+    color: black;
+    text-align: left;
+}   
+
+h2 {
+    text-decoration: underline;
+}
+
+.shows {
+    border: 2px;
+    font-size: 16px;
+    grid-column: 1 / 2;
+    grid-row: 1/ 5;
+    border-right: 2px solid black;
+    list-style-type: none;
+}
+
+.new_edit_show {
+    border: 2px; 
+    grid-column: 3 / 10;
+    grid-row: 1 / 5;
+}
+
+form.form-example {
+    display: table;
+}
+
+div.form-example {
+    display: table-row;
+}
+
+label, input {
+    display: table-cell;
+    margin-bottom: 10px;
+}
+
+label {
+    padding-right: 10px;
+}
+
+.iceCube {
+    height: 175px;
+    width: 350px;
+    border-radius: 2em;
+}
