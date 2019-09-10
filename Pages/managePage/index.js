@@ -6,11 +6,9 @@ export default class ManagePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            tvShow: [
-                {newName: "",
-                newRating: "3",
-                newUrl: "https://www.blank.com"}
-            ],
+            newName: "",
+            newRating: "",
+            newUrl: "",
             shows: []
         }
     }
@@ -19,29 +17,17 @@ export default class ManagePage extends Component {
         console.log("tvShowSelected");
     }
 
-    // deleteButton = (showIndex) => {
-    //     const tvShow = [...this.state.tvShows];
-    //     tvShow.splice(showIndex, 1);
-    //     this.setState({ tvShow: tvShow })
-    // }
-
-    updateShow = (tvShow) => {
+    updateShow = () => {
         this.setState((prevState) => ({
-            tvShow,
-            shows: [...prevState.shows, tvShow]
-        })
+            shows: [...prevState.shows, {
+                name: this.state.newName,
+                rating: this.state.newRating,
+                url: this.state.newUrl
+            }
+            ]
+
+        }),
         )
-    }
-
-
-    saveTVshow = () => {
-        let shows = [];
-
-        for (let i = 0; i < this.state.shows.length; i++) {
-            return shows.push(<SideNav name={shows.title} tvShowSelected={(e) => {
-
-            }} />)
-        }
     }
 
     renderShows = () => {
@@ -53,6 +39,7 @@ export default class ManagePage extends Component {
         )
     }
     render() {
+        console.log(this.state)
         return (
             <div>
                 <div className="tvShowListings">
@@ -61,19 +48,12 @@ export default class ManagePage extends Component {
 
                     <div className="new_edit_show">
                         <h2>New/Edit Show</h2>
-                        <ul className="shows">
-                            <li className="show2"><SideNav title={"My GF is a Gumiho"} name={this.state.name} selectHandler={this.tvShowSelected} allowDelete={true} /></li>
-                        </ul>
                         <div className="form-example">
                             <div className="form-example">
                                 <label htmlFor="name">Enter your show: </label>
                                 <input type="text" value={this.state.newName} onChange={(e) => {
                                     this.setState({
-                                        tvShow: {
-                                            newName: e.target.value,
-                                            newRating: this.state.tvShow.newRating,
-                                            newUrl: this.state.tvShow.newUrl
-                                        }
+                                        newName: e.target.value,
                                     })
                                 }} placeholder="Show name"></input>
                             </div>
@@ -82,11 +62,10 @@ export default class ManagePage extends Component {
                                 <label htmlFor="rating">Enter your rating: </label>
                                 <input type="text" value={this.state.newRating} onChange={(e) => {
                                     this.setState({
-                                        tvShow: {
-                                            newRating: e.target.value,
-                                            newName: this.state.tvShow.newName,
-                                            newUrl: this.state.tvShow.newUrl
-                                        }
+
+                                        newRating: e.target.value,
+
+
                                     })
                                 }} placeholder="Show rating"></input>
                             </div>
@@ -95,16 +74,15 @@ export default class ManagePage extends Component {
                                 <label htmlFor="image">Enter your Image URL: </label>
                                 <input type="text" value={this.state.newUrl} onChange={(e) => {
                                     this.setState({
-                                        tvShows: {
-                                            newUrl: e.target.value,
-                                            newName: this.state.tvShow.newName,
-                                            newRating: this.state.tvShow.newUrl
-                                        }
+
+                                        newUrl: e.target.value,
+
+
                                     })
                                 }} placeholder="Show url"></input>
                             </div>
 
-                            <button onClick={() => { this.updateShow(this.state.tvShow) }}>CREATE/UPDATE</button>
+                            <button onClick={() => { this.updateShow() }}>CREATE/UPDATE</button>
                         </div>
                     </div>
                 </div>

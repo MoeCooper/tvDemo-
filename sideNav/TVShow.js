@@ -23,7 +23,7 @@ export default class SideNav extends Component {
             <div>
                 {this.deleteButton()}
                 <h1><button 
-                onClick={this.props.tvShowSelected}>{this.props.title}
+                onClick={this.props.tvShowSelected}>{this.props.name}
                 </button></h1>
                 
             </div>
