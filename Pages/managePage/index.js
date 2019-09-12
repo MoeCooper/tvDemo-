@@ -3,40 +3,30 @@ import SideNav from '../../sideNav/TVShow'
 import PropTypes from 'prop-types'
 
 export default class ManagePage extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
+    state = {
+        newName: "",
+        newRating: "",
+        newUrl: "",
+        shows: []
+    }
+
+
+    updateShow = (tvShow) => {
+        this.props.saveTvShow(tvShow)
+        this.setState({
             newName: "",
             newRating: "",
-            newUrl: "",
-            shows: []
-        }
-    }
-
-    tvShowSelected = () => {
-        console.log("tvShowSelected");
-    }
-
-    updateShow = () => {
-        this.setState((prevState) => ({
-            shows: [...prevState.shows, {
-                name: this.state.newName,
-                rating: this.state.newRating,
-                url: this.state.newUrl
-            }
-            ]
-
-        }),
-        )
+            newUrl: ""
+        })
     }
 
     renderShows = () => {
-        return (
-            this.state.shows.map((c, i) => {
-                return <SideNav key={i} name={c.name} />
-            }
-            )
-        )
+        return this.props.tvShows.map((c, i) => {
+            return <SideNav key={i} 
+            name={c.name} 
+            rating={c.rating}
+            url={c.url} />
+        })
     }
     render() {
         console.log(this.state)
@@ -74,15 +64,16 @@ export default class ManagePage extends Component {
                                 <label htmlFor="image">Enter your Image URL: </label>
                                 <input type="text" value={this.state.newUrl} onChange={(e) => {
                                     this.setState({
-
                                         newUrl: e.target.value,
-
-
                                     })
                                 }} placeholder="Show url"></input>
                             </div>
-
-                            <button onClick={() => { this.updateShow() }}>CREATE/UPDATE</button>
+                            <button onClick={(e) => { this.updateShow({
+                                
+                                name: this.state.newName,
+                                rating: this.state.newRating,
+                                url: this.state.newUrl
+                            })}}>CREATE/UPDATE</button>
                         </div>
                     </div>
                 </div>
@@ -92,5 +83,9 @@ export default class ManagePage extends Component {
 }
 
 ManagePage.propType = {
-    title: PropTypes.string
+    title: PropTypes.string,
+    shows: PropTypes.object.isRequired,
+    showDeleted: PropTypes.func.isRequired,
+    saveTVShow: PropTypes.func.isRequired
 };
+

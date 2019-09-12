@@ -17,13 +17,16 @@ export default class SideNav extends Component {
             )
         }
     }
+
     render(){
         return (
 
             <div>
                 {this.deleteButton()}
                 <h1><button 
-                onClick={this.props.tvShowSelected}>{this.props.name}
+                onClick={this.props.tvShowSelected}><b>Show Name: </b>{this.props.name}
+                {this.props.tvShowSelected}<b> Show Rating: </b>{this.props.rating}
+                {this.props.tvShowSelected}<b> Show URL: </b>{this.props.url}
                 </button></h1>
                 
             </div>
