@@ -3,6 +3,8 @@ import SideNav from '../../sideNav/TVShow'
 import PropTypes from 'prop-types'
 
 export default class ManagePage extends Component {
+
+
     state = {
         newName: "",
         newRating: "",
@@ -22,10 +24,11 @@ export default class ManagePage extends Component {
 
     renderShows = () => {
         return this.props.tvShows.map((c, i) => {
-            return <SideNav key={i} 
-            name={c.name} 
-            rating={c.rating}
-            url={c.url} />
+            return <SideNav key={i}
+                name={c.name}
+                rating={c.rating}
+                url={c.url}
+            />
         })
     }
     render() {
@@ -68,12 +71,14 @@ export default class ManagePage extends Component {
                                     })
                                 }} placeholder="Show url"></input>
                             </div>
-                            <button onClick={(e) => { this.updateShow({
-                                
-                                name: this.state.newName,
-                                rating: this.state.newRating,
-                                url: this.state.newUrl
-                            })}}>CREATE/UPDATE</button>
+                            <button onClick={(e) => {
+                                this.updateShow({
+
+                                    name: this.state.newName,
+                                    rating: this.state.newRating,
+                                    url: this.state.newUrl
+                                })
+                            }}>CREATE/UPDATE</button>
                         </div>
                     </div>
                 </div>

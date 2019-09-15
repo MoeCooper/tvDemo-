@@ -12,9 +12,10 @@ class App extends Component {
     tvShows: []
   }
 
+  
     //is deleteButton same as showDeleted?
-    deleteButton = (showIndex) => {
-        const tvShow = [...this.state.tvShows];
+    showDeleted = (showIndex) => {
+      const tvShow = [...this.state.tvShows];
         tvShow.splice(showIndex, 1);
         this.props.deleteButton({ tvShow: tvShow })
     }
@@ -32,14 +33,23 @@ class App extends Component {
         }]
       }))
     };
+    
+    renderPreviewPage = () => {
+      return <PreviewPage shows={this.state.shows} />
+    }
+    
 
-    renderManagePage = () => <ManagePage saveTvShow={this.saveTvShow} tvShows={this.state.tvShows} />
+    renderManagePage = () => <ManagePage 
+    saveTvShow={this.saveTvShow} 
+    tvShows={this.state.tvShows} 
+    showDeleted={this.showDeleted}
+    />
     render()
     {
       return (<div className="App">
         <Navigation />
         <Route exact path="/" component={this.renderManagePage} />
-        <Route path="/previewPAge" component={PreviewPage} />
+        <Route path="/previewPage" component={this.renderPreviewPage} />
       </div>);
     }
   }
