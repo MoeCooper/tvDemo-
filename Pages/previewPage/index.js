@@ -1,14 +1,29 @@
 import React, { Component } from 'react'
 import TVShow from '../../sideNav/TVShow'
 import PropTypes from 'prop-types'
+import { isNumber } from 'util';
 
 export default class PreviewPage extends Component {
 
     state = {
-            name: "",
-            rating: "",
-            url: ""
+        name: "",
+        rating: "",
+        url: ""
     }
+
+    calcAvgRating = () => {
+
+        if(this.props.shows.length === 0){
+            return false;
+        }
+
+        let total = this.props.shows.reduce((total, shows) => {
+           return total + isNumber(shows.rating)
+        })
+        
+        let avg = total/this.props.show.length;
+        return avg;
+    };
 
     tvShowSelected = () => {
         this.setState({
@@ -19,47 +34,37 @@ export default class PreviewPage extends Component {
     }
 
     renderShows = () => {
-        return (
-            <TVShow
-                {...this.props.show.name} 
-                selectHandler={this.tvShowSelected}>
-            
-            </TVShow>
-        )
-    }
-
-    renderShows = () => {
-        return this.props.shows.filter((show) => {
-            return Number(show.rating) <= 4
-        }).map((show,ind) => {
-            return <TVShow key={ind} name={show.name} allowDelete={true} selectHandler={(e) => this.showSelected(e)} deleteHandler={this.showDeleted} />
+        return this.props.shows.filter((shows) => {
+            return Number(shows.rating) <= 4
+        }).map((show, i) => {
+            return <TVShow 
+            name={show.name} 
+            allowDelete={true} 
+            selectHandler={(e) => this.showSelected(e)}
+            deleteHandler={this.showDeleted} />
         })
     }
-
     render() {
-        return (
+            return(
             <div>
-                <div className="managePreview">
-                </div>
-                <div id="tvShowListings">
-                    <ul className="shows">
-                        <h2>Shows</h2>
-                        <li className="show1" allowDelete={false}>{this.renderShows} <button>{this.state.selectedShow}</button></li>
-                        <li className="show2" allowDelete={false}>{this.renderShows} <button>{this.state.selectedShow}</button></li>
-                        <li className="show2" allowDelete={false}>{this.renderShows} <button>{this.state.selectedShow}</button></li>
-                    </ul>
-                    <div className="showName">
-                        <h2>[Show Name]</h2>
-                    </div>
-                    <div className="Ratings">
-                        <h2>[Ratings] </h2>
-                    </div>
-                </div>
+        <div className="managePreview">
+        </div>
+        <div id="tvShowListings">
+            <ul className="shows">
+                <h2>Shows</h2>
+                {() => this.renderShows}
+            </ul>
+            <div className="Ratings">
+                <h2>[Ratings] </h2>
+                {() => this.calcAvgRating}
             </div>
+        </div>
+        </div>
         )
     }
 }
 
 PreviewPage.propTypes = {
-    show: PropTypes.object.isRequired
-  };
+    shows: PropTypes.object.isRequired,
+    show: PropTypes.array.isRequired
+};

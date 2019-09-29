@@ -12,6 +12,9 @@ export default class ManagePage extends Component {
         shows: []
     }
 
+    deleteShow = (show) => {
+        this.props.deleteShow(show)
+    }
 
     updateShow = (tvShow) => {
         this.props.saveTvShow(tvShow)
@@ -24,10 +27,12 @@ export default class ManagePage extends Component {
 
     renderShows = () => {
         return this.props.tvShows.map((c, i) => {
-            return <SideNav key={i}
+            return <SideNav 
+                key={i}
                 name={c.name}
                 rating={c.rating}
                 url={c.url}
+                deleteShow={this.props.deleteShow}
             />
         })
     }
@@ -91,6 +96,7 @@ ManagePage.propType = {
     title: PropTypes.string,
     shows: PropTypes.object.isRequired,
     showDeleted: PropTypes.func.isRequired,
-    saveTVShow: PropTypes.func.isRequired
+    saveTVShow: PropTypes.func.isRequired,
+    deleteShow: PropTypes.func.isRequired
 };
 
